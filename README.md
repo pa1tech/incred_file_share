@@ -5,3 +5,6 @@
 
 ## [Click here to download the app](https://github.com/pa1tech/ftpServer/blob/master/FTP_Server.zip?raw=true)
  Run the executable in the folder which you would like to share via FTP
+ 
+### Bugs
+- Doesn't work when port 21 is busy. To be fixed in the next release
