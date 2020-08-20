@@ -3,7 +3,7 @@
 - Makes file sharing across devices over a local network as easy as browsing a URL
 - No Python installation required on the user computer
 
-## [Click here to download the app](https://github.com/pa1tech/ftpServer/blob/master/FTP_Server.zip?raw=true)
+## [Click here to download the app](https://github.com/pa1tech/ftpServer/releases/download/v1.0/FTP_Server.exe?raw=true)
  Run the executable in the folder which you would like to share via FTP
  
 ### Bugs
