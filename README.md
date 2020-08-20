@@ -5,6 +5,3 @@
 
 ## [Click here to download the latest release v1.0](https://github.com/pa1tech/ftpServer/releases/download/v1.0/FTP_Server.exe)
  Run the executable in the folder which you would like to share via FTP
- 
-### Bugs
-- Doesn't work when port 21 is busy. To be fixed in the next release
