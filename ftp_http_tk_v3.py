@@ -1,21 +1,31 @@
-from os import getcwd
+#pyinstaller --noconsole --icon=smiley.ico --add-data="smiley.ico;." --onefile ftp_http_tk_build.py
+
+from os import path,getcwd
 from pyftpdlib.authorizers import DummyAuthorizer
 from pyftpdlib.handlers import FTPHandler
 from pyftpdlib.servers import FTPServer
 from socket import gethostname,gethostbyname,getaddrinfo,AF_INET
-import http.server,socketserver
+import http.server,socketserver,ctypes
 import tkinter as tk
 from threading import Thread
 
+myappid = 'pa1tech.ftpserver.3'
+ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)
+
+def resource_path(relative_path):
+    """ Get absolute path to resource, works for dev and for PyInstaller """
+    base_path = getattr(sys, '_MEIPASS', os.path.dirname(os.path.abspath(__file__)))
+    return os.path.join(base_path, relative_path)
+    
 class tkFTP():
 	def __init__(self): 
 		#Configuring window
 		window = tk.Tk()
-		window.title("FTP Server")
+		window.title("!ncred File Share")
 		window.geometry("400x210")
 		window.resizable(width=False, height=False)
 		window.grid_columnconfigure((0,1), weight=1, uniform="fred")
-		window.iconbitmap("./smiley.ico")
+		window.iconbitmap(resource_path("smiley.ico"))
 
 		#FTP variables
 		cwd = getcwd(); authorizer = DummyAuthorizer(); authorizer.add_anonymous(cwd)
@@ -33,10 +43,7 @@ class tkFTP():
 		self.greeting = tk.Label(text="Welcome to !ncred File Share",font=("", 15, 'bold'))
 
 		self.host_msg = tk.Label(text="Host IP's:",font=("", 12, 'italic'),anchor='e')
-		self.port_msg = tk.Label(text="Port:",font=("", 10, 'italic'),anchor="e")
-
-		self.host = tk.Label(text=str(self.IPAddr),font=("", 12, 'bold'))
-		self.port = tk.Entry(width=10,font=("", 10, 'bold')); self.port.insert(0, "21")
+		self.host = tk.Label(text=str(self.IPAddr),font=("", 10, 'bold'))
 
 		self.start = tk.Button(text="Start server",command=self.startServer,font=("", 11, 'bold'))
 		self.stop = tk.Button(text="Stop server",command=self.stopServer,font=("", 11, 'bold'))
@@ -66,3 +73,5 @@ class tkFTP():
 
 if __name__ == '__main__':
 	tkFTP()
+
+

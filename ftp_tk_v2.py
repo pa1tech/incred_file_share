@@ -6,6 +6,14 @@ from socket import gethostname,gethostbyname
 import tkinter as tk
 from threading import Thread
 
+myappid = 'pa1tech.ftpserver.2'
+ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)
+
+def resource_path(relative_path):
+    """ Get absolute path to resource, works for dev and for PyInstaller """
+    base_path = getattr(sys, '_MEIPASS', os.path.dirname(os.path.abspath(__file__)))
+    return os.path.join(base_path, relative_path)
+    
 class tkFTP():
 	def __init__(self): 
 		#Configuring window
@@ -14,7 +22,7 @@ class tkFTP():
 		window.geometry("320x180")
 		window.resizable(width=False, height=False)
 		window.grid_columnconfigure((0,1), weight=1, uniform="fred")
-		window.iconbitmap("./smiley.ico")
+		window.iconbitmap(resource_path("smiley.ico"))
 
 		#FTP variables
 		hostname = gethostname(); cwd = getcwd()
@@ -65,3 +73,5 @@ class tkFTP():
 
 if __name__ == '__main__':
 	tkFTP()
+
+#pyinstaller --noconsole --icon=smiley.ico --add-data="smiley.ico;." --onefile ftp_tk_build.py

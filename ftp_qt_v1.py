@@ -7,6 +7,15 @@ from pyftpdlib.handlers import FTPHandler
 from pyftpdlib.servers import FTPServer
 import socket  
 import threading
+import ctypes
+
+myappid = 'pa1tech.ftpserver.1'
+ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)
+
+def resource_path(relative_path):
+    """ Get absolute path to resource, works for dev and for PyInstaller """
+    base_path = getattr(sys, '_MEIPASS', os.path.dirname(os.path.abspath(__file__)))
+    return os.path.join(base_path, relative_path)
 
 class Form(QDialog):
 
@@ -62,7 +71,7 @@ class Form(QDialog):
 if __name__ == '__main__':
     # Create the Qt Application
     app = QApplication(sys.argv)
-    app.setWindowIcon(QIcon("./smiley.ico"))
+    app.setWindowIcon(QIcon(resource_path("smiley.ico")))
     
     # Create and show the form
     form = Form()
@@ -70,6 +79,8 @@ if __name__ == '__main__':
 
     # Run the main Qt loop
     app.exec_()
+
+#pyinstaller --noconsole --icon=smiley.ico --add-data="smiley.ico;." --onefile ftp_qt_build.py
 
 #Links
 #https://pyinstaller.readthedocs.io/en/stable/usage.html
